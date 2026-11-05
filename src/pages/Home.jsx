@@ -1,56 +1,25 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import TerminalWindow from "../components/TerminalWindow";
 import { profile } from "../data/profile";
 
-const BOOT_LINES = [
-  "$ whoami",
-  profile.name,
-  "$ cat role.txt",
-  profile.role,
-  "$ echo $STATUS",
-  "available for internships and jobs — 2026/27",
-];
-
 export default function Home() {
-  const [visibleLines, setVisibleLines] = useState(
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ? BOOT_LINES.length : 0
-  );
-
-  useEffect(() => {
-    if (visibleLines >= BOOT_LINES.length) return;
-    const t = setTimeout(() => setVisibleLines((n) => n + 1), 420);
-    return () => clearTimeout(t);
-  }, [visibleLines]);
-
   return (
-    <section className="wrap page">
-      <TerminalWindow title={`~/${profile.handle}/intro.sh`}>
-        <div className="boot-log mono">
-          {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
-            <div
-              key={i}
-              className={line.startsWith("$") ? "boot-cmd" : "boot-out accent-teal"}
-            >
-              {line}
-            </div>
-          ))}
-          {visibleLines < BOOT_LINES.length && <span className="cursor" />}
+    <section className="hero wrap" id="home">
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="hero-sphere" aria-hidden="true"><span className="sphere-ring sphere-ring-one" /><span className="sphere-ring sphere-ring-two" /></div>
+      <div className="hero-content">
+        <p className="eyebrow hero-eyebrow"><span className="availability-dot" /> OPEN TO BACKEND ENGINEERING OPPORTUNITIES</p>
+        <p className="hero-intro">HELLO, I'M</p>
+        <h1 className="hero-name">SUMANTH<span>.</span></h1>
+        <p className="hero-role">SOFTWARE ENGINEER <b>·</b> BACKEND DEVELOPMENT</p>
+        <p className="hero-summary">I build reliable backend systems with <strong>Java, Spring Boot, Kafka</strong> and distributed architectures. Turning complex ideas into practical engineering.</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#projects">Explore projects <span>↘</span></a>
+          <a className="button button-secondary" href="#contact">Let's connect ↗</a>
         </div>
-      </TerminalWindow>
-
-      <h1 className="hero-title">
-        Building backend systems that don't <span className="accent-amber">fall over</span>.
-      </h1>
-      <p className="hero-summary">{profile.summary}</p>
-
-      <div className="cta-row">
-        <Link to="/projects" className="btn btn-primary">
-          view projects →
-        </Link>
-        <Link to="/contact" className="btn btn-ghost">
-          get in touch
-        </Link>
+        <div className="social-links">
+          <a href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href={`mailto:${profile.email}?subject=${encodeURIComponent("Portfolio enquiry")}&body=${encodeURIComponent("Hi Sumanth,\n\nI came across your portfolio and would like to connect.")}`}>Email ↗</a>
+        </div>
       </div>
     </section>
   );

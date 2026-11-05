@@ -1,43 +1,25 @@
-import TerminalWindow from "../components/TerminalWindow";
 import { profile } from "../data/profile";
-
-const rows = [
-  { key: "email", value: profile.email, href: `mailto:${profile.email}` },
-  { key: "phone", value: profile.phone, href: `tel:${profile.phone.replace(/\s/g, "")}` },
-  { key: "github", value: profile.github.replace("https://", ""), href: profile.github },
-  { key: "linkedin", value: profile.linkedin.replace("https://", ""), href: profile.linkedin },
-  { key: "location", value: profile.location, href: null },
-];
 
 export default function Contact() {
   return (
-    <section className="wrap page">
-      <h1 className="page-title mono">
-        <span className="accent-teal">$</span> cat contact.env
-      </h1>
-
-      <TerminalWindow title="~/contact.env">
-        <div className="contact-rows mono">
-          {rows.map((r) => (
-            <div key={r.key} className="contact-row">
-              <span className="accent-amber">{r.key}</span>
-              <span className="text-dim">=</span>
-              {r.href ? (
-                <a href={r.href} target="_blank" rel="noreferrer" className="contact-value">
-                  {r.value}
-                </a>
-              ) : (
-                <span className="contact-value">{r.value}</span>
-              )}
-            </div>
-          ))}
+    <section className="section wrap" id="contact">
+      <div className="contact-panel reveal">
+        
+        <h2>Let's build something that matters.</h2>
+        <p>Open to backend engineering internships and full-time opportunities.</p>
+        <div className="contact-actions">
+          <a
+              className="button button-light"
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent("Portfolio enquiry")}&body=${encodeURIComponent("Hi Sumanth,\n\nI came across your portfolio and would like to connect.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            {profile.email} ↗
+          </a>
+          <a className="button button-outline-light" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a className="button button-outline-light" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         </div>
-      </TerminalWindow>
-
-      <p className="text-dim">
-        Fastest way to reach me is email. Open to backend engineering internships and
-        collaboration on projects that ship.
-      </p>
+      </div>
     </section>
   );
 }

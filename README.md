@@ -1,6 +1,6 @@
 # Sumanth M B — Portfolio
 
-Terminal-themed multi-page portfolio. React + Vite + React Router.
+Modern single-page backend engineering portfolio. React + Vite + React Router.
 
 ## Run locally
 ```
